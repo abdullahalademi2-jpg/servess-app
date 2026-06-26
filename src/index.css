@@ -2276,10 +2276,11 @@ body::after {
 .office-box-card {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  text-align: center;
-  padding: 16px 12px 14px;
+  text-align: right;
+  padding: 12px;
+  gap: 12px;
   border-radius: var(--radius-md);
   background: var(--card-bg);
   border: 1px solid rgba(10, 24, 40, 0.05);
@@ -2289,6 +2290,21 @@ body::after {
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
+}
+
+.office-box-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.office-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .office-box-name {
