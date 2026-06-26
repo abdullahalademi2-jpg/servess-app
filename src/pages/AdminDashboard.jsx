@@ -13,6 +13,7 @@ export default function AdminDashboard({ adminUser, onLogout, onAdDetailClick, o
   const [officeSearchQuery, setOfficeSearchQuery] = useState('');
   const [officeStatusFilter, setOfficeStatusFilter] = useState('all');
   const [adSearchQuery, setAdSearchQuery] = useState('');
+  const [showWhatsappModal, setShowWhatsappModal] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
@@ -136,10 +137,12 @@ export default function AdminDashboard({ adminUser, onLogout, onAdDetailClick, o
           <span className="stat-val">{totalViews}</span>
           <span className="stat-lbl">إجمالي المشاهدات</span>
         </div>
-        <div className="dashboard-stat-card">
+        <div className="dashboard-stat-card" onClick={() => setShowWhatsappModal(true)} style={{ cursor: 'pointer', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: '#25D366' }}></div>
           <div style={{ fontSize: '13px', marginBottom: '1px' }}>💬</div>
-          <span className="stat-val">{totalWhatsappClicks}</span>
+          <span className="stat-val" style={{ color: '#25D366' }}>{totalWhatsappClicks}</span>
           <span className="stat-lbl">نقرات الواتساب</span>
+          <div style={{ fontSize: '9px', color: '#94a3b8', marginTop: '4px', background: 'rgba(37,211,102,0.1)', padding: '2px 6px', borderRadius: '4px' }}>عرض المكاتب المتواصل معها</div>
         </div>
       </div>
 
@@ -293,6 +296,53 @@ export default function AdminDashboard({ adminUser, onLogout, onAdDetailClick, o
           </div>
         )}
       </div>
+
+      {/* WhatsApp Clicks Details Modal */}
+      {showWhatsappModal && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.6)', zIndex: 100000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '20px', backdropFilter: 'blur(4px)'
+        }} onClick={() => setShowWhatsappModal(false)}>
+          <div style={{
+            background: '#fff', borderRadius: '24px', padding: '24px',
+            width: '100%', maxWidth: '340px',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            maxHeight: '80vh', display: 'flex', flexDirection: 'column'
+          }} onClick={e => e.stopPropagation()}>
+            <h3 style={{ margin: '0 0 16px 0', color: '#0f172a', fontSize: '18px', fontWeight: '800', textAlign: 'center' }}>
+              تفاصيل تواصل الواتساب
+            </h3>
+            
+            <div style={{ overflowY: 'auto', flex: 1, paddingRight: '4px' }}>
+              {offices.filter(o => (o.whatsappClicks || 0) > 0).sort((a,b) => b.whatsappClicks - a.whatsappClicks).map(o => (
+                <div key={o.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 0', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <img src={o.logo || `https://ui-avatars.com/api/?name=${encodeURIComponent(o.name)}&background=0a1828&color=fff`} alt="" style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                    <span style={{ fontSize: '14px', fontWeight: '700', color: '#334155' }}>{o.name}</span>
+                  </div>
+                  <div style={{ background: 'rgba(37,211,102,0.1)', color: '#25D366', padding: '4px 10px', borderRadius: '12px', fontSize: '13px', fontWeight: '800' }}>
+                    {o.whatsappClicks} نقرة
+                  </div>
+                </div>
+              ))}
+              {offices.filter(o => (o.whatsappClicks || 0) > 0).length === 0 && (
+                <p style={{ textAlign: 'center', color: '#94a3b8', margin: '20px 0' }}>لا يوجد تواصل عبر الواتساب حتى الآن</p>
+              )}
+            </div>
+
+            <button onClick={() => setShowWhatsappModal(false)} style={{
+              background: '#f1f5f9', color: '#475569', border: 'none',
+              padding: '14px', width: '100%', borderRadius: '16px',
+              fontWeight: 'bold', cursor: 'pointer', fontSize: '15px',
+              marginTop: '16px', transition: 'background 0.2s'
+            }}>
+              إغلاق
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
