@@ -202,13 +202,19 @@ export default function Home({ onAdDetailClick, onOfficeClick, onShowAllAds, onS
           </span>
         </div>
 
-        <div className="offices-horizontal-scroll">
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(2, 1fr)',
+          gap: '12px',
+          padding: '0 16px 20px 16px'
+        }}>
           {offices.map((office) => (
-            <OfficeCard 
-              key={office.id} 
-              office={office} 
-              onClick={() => onOfficeClick && onOfficeClick(office.id)}
-            />
+            <div key={office.id} style={{ width: '100%' }}>
+              <OfficeCard 
+                office={office} 
+                onClick={() => onOfficeClick && onOfficeClick(office.id)}
+              />
+            </div>
           ))}
         </div>
 
