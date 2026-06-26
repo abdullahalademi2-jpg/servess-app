@@ -32,6 +32,7 @@ export default function SplashScreen({ onFinish }) {
           <Globe2 size={64} color="#1E3A8A" strokeWidth={2} />
         </div>
         <h1 className="splash-title">خدمة مكتب</h1>
+        <h2 className="splash-slogan">جميع المكاتب في مكان واحد</h2>
         
         <div className="splash-services">
           <span style={{animationDelay: '1.5s'}}>عمرة</span>
