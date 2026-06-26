@@ -873,7 +873,7 @@ body::after {
 
 /* تكبير الصورة لتملأ أعلى البطاقة بالكامل */
 .ad-img-container {
-  height: 220px;
+  height: 300px;
   margin: 0; /* ملء العرض بالكامل بدون حواف جانبية */
   border-radius: 28px 28px 0 0; /* تطابق تقويس البطاقة العلوية */
 }
@@ -902,7 +902,7 @@ body::after {
 }
 
 .ad-img-container {
-  height: 200px;
+  height: 300px;
   position: relative;
   overflow: hidden;
   background: var(--primary-light);
