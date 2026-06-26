@@ -12,9 +12,11 @@ import AdCard from './components/AdCard';
 import { dataService } from './services/dataService';
 import { Search, Heart, ArrowRight } from 'lucide-react';
 import SideNav from './components/SideNav';
+import SplashScreen from './components/SplashScreen';
 
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true); // Set to true to show it on load for now
   const [activeTab, setActiveTab] = useState('home');
   const [tabHistory, setTabHistory] = useState(['home']);
   const [selectedAdId, setSelectedAdId] = useState(null);
@@ -361,6 +363,7 @@ export default function App() {
 
   return (
     <div className="app-container">
+      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
       {/* Scrollable page content */}
       <div className="app-content">
         <React.Suspense fallback={<div className="loader-spinner" style={{ margin: 'auto', marginTop: '50px' }} />}>
