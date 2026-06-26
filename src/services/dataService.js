@@ -229,7 +229,7 @@ export const dataService = {
     let result = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
     
     if (!filter.admin) {
-      result = result.filter(office => office.status === 'active' || !office.status);
+      result = result.filter(office => office.status !== 'suspended' && office.status !== 'pending');
     }
     
     if (filter.city && filter.city !== "الكل") {
