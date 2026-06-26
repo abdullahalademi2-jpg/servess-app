@@ -78,7 +78,7 @@ export default function AllOffices({ onBackClick, onOfficeClick, selectedCity })
         ) : (
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: '1fr',
             gap: '12px'
           }}>
             {offices.map(office => (
