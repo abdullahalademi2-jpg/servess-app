@@ -204,7 +204,7 @@ export default function Home({ onAdDetailClick, onOfficeClick, onShowAllAds, onS
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
+          gridTemplateColumns: '1fr',
           gap: '12px',
           padding: '0 16px 20px 16px'
         }}>
