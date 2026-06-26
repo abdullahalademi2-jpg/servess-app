@@ -8,12 +8,12 @@ export default function SplashScreen({ onFinish }) {
     // Wait longer, then start exit animation
     const timer = setTimeout(() => {
       setStage('exiting');
-    }, 4500);
+    }, 6000);
 
     // After exit animation finishes, tell App to remove this component
     const finishTimer = setTimeout(() => {
       if (onFinish) onFinish();
-    }, 5500); // Wait for the new longer curtain transition
+    }, 7200); // Wait for the new longer curtain transition
 
     return () => {
       clearTimeout(timer);
@@ -35,17 +35,17 @@ export default function SplashScreen({ onFinish }) {
         <h1 className="splash-title">خدمة مكتب</h1>
         
         <div className="splash-services">
-          <span style={{animationDelay: '1.2s'}}>عمرة</span>
-          <span className="dot" style={{animationDelay: '1.3s'}}>•</span>
-          <span style={{animationDelay: '1.4s'}}>تأشيرات</span>
-          <span className="dot" style={{animationDelay: '1.5s'}}>•</span>
-          <span style={{animationDelay: '1.6s'}}>زيارات عائلية</span>
+          <span style={{animationDelay: '1.5s'}}>عمرة</span>
           <span className="dot" style={{animationDelay: '1.7s'}}>•</span>
-          <span style={{animationDelay: '1.8s'}}>تذاكر طيران</span>
-          <span className="dot" style={{animationDelay: '1.9s'}}>•</span>
-          <span style={{animationDelay: '2.0s'}}>رحلات سفر</span>
+          <span style={{animationDelay: '1.9s'}}>تأشيرات</span>
           <span className="dot" style={{animationDelay: '2.1s'}}>•</span>
-          <span style={{animationDelay: '2.2s'}}>شحن</span>
+          <span style={{animationDelay: '2.3s'}}>زيارات عائلية</span>
+          <span className="dot" style={{animationDelay: '2.5s'}}>•</span>
+          <span style={{animationDelay: '2.7s'}}>تذاكر طيران</span>
+          <span className="dot" style={{animationDelay: '2.9s'}}>•</span>
+          <span style={{animationDelay: '3.1s'}}>رحلات سفر</span>
+          <span className="dot" style={{animationDelay: '3.3s'}}>•</span>
+          <span style={{animationDelay: '3.5s'}}>شحن</span>
         </div>
 
         <div className="splash-loader"></div>

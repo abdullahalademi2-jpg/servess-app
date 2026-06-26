@@ -103,7 +103,7 @@
 .splash-services span {
   opacity: 0;
   transform: translateY(10px);
-  animation: popIn 0.5s forwards ease-out;
+  animation: popIn 0.8s forwards ease-out;
 }
 
 .splash-services .dot {
