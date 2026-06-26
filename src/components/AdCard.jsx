@@ -32,20 +32,20 @@ const AdCard = React.memo(function AdCard({ ad, onDetailClick }) {
         <span className="ad-service-badge">{ad.category}</span>
       </div>
 
-      <div className="ad-card-body" style={{ textAlign: 'center' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginBottom: '6px' }}>
+      <div className="ad-card-body" style={{ textAlign: 'right', padding: '12px 10px 4px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '8px', marginBottom: '6px' }}>
           <img 
             src={officeLogo || 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=100&q=80'} 
             alt="logo" 
-            style={{ width: '36px', height: '36px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(0,0,0,0.1)', padding: 0, margin: 0, zIndex: 1 }}
+            style={{ width: '28px', height: '28px', borderRadius: '50%', objectFit: 'cover', border: '1px solid rgba(0,0,0,0.1)', padding: 0, margin: 0, zIndex: 1 }}
             loading="lazy"
             onError={(e) => e.target.style.display = 'none'}
           />
-          <h4 className="ad-office-name" style={{ fontSize: '14px', fontWeight: '800', margin: 0, padding: 0, lineHeight: 1 }}>
+          <h4 className="ad-office-name" style={{ fontSize: '12px', fontWeight: '700', margin: 0, padding: 0, lineHeight: 1.2, color: 'var(--primary)' }}>
             {ad.officeName}
           </h4>
         </div>
-        <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '2px', textAlign: 'center', width: '100%' }}>
+        <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginBottom: '4px', textAlign: 'right', width: '100%', paddingRight: '36px' }}>
           {ad.city}{ad.street ? ` — ${ad.street}` : ''}
         </div>
         
@@ -68,7 +68,7 @@ const AdCard = React.memo(function AdCard({ ad, onDetailClick }) {
 
         {/* السعر في المنتصف وبدون مسافة */}
         {typeof ad.price !== 'undefined' && ad.price !== null && (
-          <div style={{ fontSize: 13, fontWeight: 900, color: 'var(--accent)', marginTop: '0' }}>
+          <div style={{ fontSize: 13, fontWeight: 900, color: 'var(--accent)', marginTop: '0', textAlign: 'center' }}>
             {ad.price}<span style={{ fontSize: 10, fontWeight: 700, color: 'var(--text-muted)' }}>ر.س</span>
           </div>
         )}
