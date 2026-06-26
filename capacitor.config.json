@@ -1,0 +1,9 @@
+{
+  "appId": "com.nabil.wwap",
+  "appName": "Office Service",
+  "webDir": "dist",
+  "server": {
+    "url": "https://exquisite-blancmange-751cb7.netlify.app",
+    "cleartext": true
+  }
+}

@@ -1,0 +1,2594 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مكاتب - خدمات الحج والعمرة (عرض فوري فاخر)</title>
+    <!-- Google Fonts for Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CDNs for Standalone React + Lucide Icons -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* --- LUXURY PREMIUM DESIGN SYSTEM --- */
+      :root {
+        --primary: #0a1828;
+        --primary-light: #172a45;
+        --primary-rgb: 10, 24, 40;
+        
+        --accent: #d4af37; /* Luminous Gold */
+        --accent-rgb: 212, 175, 55;
+        --accent-light: #faf5e6;
+        --accent-gradient: linear-gradient(135deg, #b8860b 0%, #e6ca65 50%, #d4af37 100%);
+        
+        --secondary: #00a86b; /* Islamic Emerald Green */
+        --secondary-rgb: 0, 168, 107;
+        --secondary-light: #e8f7f2;
+        --secondary-gradient: linear-gradient(135deg, #008753 0%, #00c47d 100%);
+
+        --visa-blue: #1e40af;
+        --visa-gradient: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+
+        --cargo-orange: #ea580c;
+        --cargo-gradient: linear-gradient(135deg, #c2410c 0%, #f97316 100%);
+
+        --transport-purple: #6366f1;
+        --transport-gradient: linear-gradient(135deg, #4f46e5 0%, #818cf8 100%);
+        
+        --danger: #ef4444;
+        --danger-light: #fee2e2;
+        --bg-app: #f6f8fb;
+        --card-bg: #ffffff;
+        
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --text-light: #94a3b8;
+        --text-white: #ffffff;
+        
+        --border: #e2e8f0;
+        --border-light: #f1f5f9;
+        
+        /* Glowing / Colored Shadows */
+        --shadow-sm: 0 4px 10px rgba(10, 24, 40, 0.03);
+        --shadow-md: 0 10px 25px rgba(10, 24, 40, 0.05);
+        --shadow-lg: 0 20px 40px rgba(10, 24, 40, 0.08);
+        --shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.15);
+        --shadow-emerald: 0 10px 30px rgba(0, 168, 107, 0.12);
+        
+        --radius-sm: 10px;
+        --radius-md: 18px;
+        --radius-lg: 28px;
+        --radius-xl: 36px;
+        --radius-round: 50%;
+        
+        --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Cairo', sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-color: #080f1a;
+        color: var(--text-main);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        direction: rtl;
+        text-align: right;
+        overflow: hidden;
+      }
+
+      /* Ambient glow */
+      body::before {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+        top: -10%;
+        right: 10%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      body::after {
+        content: '';
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(0, 168, 107, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
+        bottom: -10%;
+        left: 10%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 480px;
+        height: 100vh;
+        max-height: 920px;
+        background-color: var(--bg-app);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+        transition: var(--transition);
+        z-index: 1;
+      }
+
+      @media (min-width: 481px) {
+        .app-container {
+          border-radius: var(--radius-xl);
+          border: 10px solid #1c273a;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .app-container {
+          max-height: 100vh;
+          border-radius: 0;
+        }
+      }
+
+      .app-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 24px 20px 100px 20px;
+        scroll-behavior: smooth;
+      }
+
+      .header-wrapper {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 20px;
+        background: rgba(246, 248, 251, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-bottom: 1px solid rgba(10, 24, 40, 0.03);
+      }
+
+      .app-logo-section {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .app-title {
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--primary);
+        background: linear-gradient(135deg, #0a1828 0%, #1e40af 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+      }
+
+      .app-subtitle {
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 1px;
+      }
+
+      .btn-action-circle {
+        width: 42px;
+        height: 42px;
+        border-radius: var(--radius-round);
+        background: var(--card-bg);
+        border: 1px solid rgba(10, 24, 40, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-sm);
+        color: var(--primary);
+        transition: var(--transition-spring);
+      }
+
+      .btn-action-circle:hover {
+        transform: scale(1.08) translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: rgba(212, 175, 55, 0.2);
+      }
+
+      .location-selector {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--card-bg);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+        padding: 8px 14px;
+        border-radius: 30px;
+        cursor: pointer;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .location-selector:hover {
+        background: var(--accent-light);
+        border-color: var(--accent);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+      }
+
+      /* Search Bar Styles */
+      .search-container {
+        position: relative;
+        margin-bottom: 24px;
+      }
+
+      .search-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 16px 48px 16px 20px;
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(10, 24, 40, 0.06);
+        background: var(--card-bg);
+        color: var(--text-main);
+        font-size: 13px;
+        font-weight: 600;
+        outline: none;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+      }
+
+      .search-input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1), var(--shadow-md);
+      }
+
+      .search-icon {
+        position: absolute;
+        right: 18px;
+        color: var(--accent);
+        pointer-events: none;
+      }
+
+      .filter-btn {
+        position: absolute;
+        left: 8px;
+        top: 8px;
+        bottom: 8px;
+        width: 40px;
+        background: var(--accent-light);
+        border: none;
+        border-radius: 12px;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .filter-btn:hover {
+        background: var(--accent-gradient);
+        color: var(--text-white);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* Modals */
+      .modal-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(10, 24, 40, 0.5);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+      .modal-content {
+        background: var(--card-bg);
+        width: 100%;
+        border-top-left-radius: var(--radius-xl);
+        border-top-right-radius: var(--radius-xl);
+        padding: 28px 24px;
+        box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.18);
+        max-height: 80%;
+        overflow-y: auto;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .modal-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .btn-close {
+        background: var(--border-light);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-round);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-main);
+        transition: var(--transition);
+      }
+
+      .btn-close:hover {
+        background: var(--danger-light);
+        color: var(--danger);
+      }
+
+      .grid-list-cities {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .btn-city {
+        padding: 12px;
+        background: var(--bg-app);
+        border: 1px solid var(--border-light);
+        border-radius: var(--radius-md);
+        text-align: center;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-main);
+        transition: var(--transition-spring);
+      }
+
+      .btn-city.active, .btn-city:hover {
+        background: var(--primary-gradient);
+        color: var(--text-white);
+        border-color: var(--primary);
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Services Grid */
+      .section-title-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        margin-top: 24px;
+      }
+
+      .section-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--primary);
+        position: relative;
+        padding-right: 12px;
+      }
+
+      .section-title::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 15%;
+        height: 70%;
+        width: 4px;
+        background: transparent;
+        border-radius: 4px;
+      }
+
+      .section-link {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--accent);
+        text-decoration: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        transition: var(--transition);
+      }
+
+      .section-link:hover {
+        color: var(--primary);
+        transform: translateX(-2px);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+
+      .service-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(10, 24, 40, 0.04);
+        border-radius: var(--radius-md);
+        padding: 8px 4px; /* Shrunk by 25% */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition-spring);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card:hover {
+        transform: translateY(-5px); /* Shrunk hover offset */
+        border-color: rgba(212, 175, 55, 0.25);
+        box-shadow: var(--shadow-gold);
+      }
+
+      .service-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px; /* Shrunk from 4px */
+        background: var(--accent-gradient);
+        transform: scaleX(0);
+        transition: var(--transition);
+      }
+
+      .service-card:hover::after {
+        transform: scaleX(1);
+      }
+
+      .service-img {
+        width: 100%;
+        height: 22px; /* Shrunk by 25% */
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 4px; /* Shrunk from 8px */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+      }
+
+      .service-title {
+        font-size: 11px; /* Shrunk from 13px */
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 2px; /* Shrunk from 4px */
+      }
+
+      .service-desc {
+        font-size: 8px; /* Shrunk from 9px */
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .service-arrow-btn {
+        width: 18px; /* Shrunk by 25% */
+        height: 18px; /* Shrunk by 25% */
+        border-radius: var(--radius-round);
+        background: var(--primary-gradient);
+        color: var(--text-white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6px; /* Shrunk from 10px */
+        font-size: 8px; /* Shrunk from 10px */
+        transition: var(--transition-spring);
+      }
+
+      .service-card:hover .service-arrow-btn {
+        background: var(--accent-gradient);
+        color: var(--primary);
+        transform: rotate(-180deg) scale(1.15);
+      }
+
+      .services-grid-two-cols {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-bottom: 24px;
+      }
+
+      /* Promo Slider */
+      .promo-slider-container {
+        position: relative;
+        width: 100%;
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        margin-bottom: 28px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+        background: var(--primary);
+      }
+
+      .promo-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 100%;
+      }
+
+      .promo-slide {
+        min-width: 100%;
+        position: relative;
+        height: 146px; /* Reduced by 25% */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      .promo-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(11, 26, 48, 0.95) 20%, rgba(11, 26, 48, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
+        z-index: 1;
+      }
+
+      .promo-content {
+        position: relative;
+        z-index: 2;
+        padding: 16px;
+        color: var(--text-white);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .promo-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: var(--accent-gradient);
+        color: var(--primary);
+        font-size: 10px;
+        font-weight: 800;
+        padding: 4px 10px;
+        border-radius: 12px;
+        z-index: 2;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .promo-title {
+        font-size: 18px;
+        font-weight: 900;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      }
+
+      .promo-subtitle {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.9);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+        margin-bottom: 8px;
+      }
+
+      .promo-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .promo-price-wrapper {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+
+      .promo-price {
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--accent);
+      }
+
+      .promo-cta-btn {
+        background: var(--accent-gradient);
+        border: none;
+        color: var(--primary);
+        padding: 8px 18px;
+        border-radius: 24px;
+        font-size: 12px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        transition: var(--transition-spring);
+      }
+
+      .promo-cta-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
+      }
+
+      .slider-indicators {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 6px;
+        z-index: 3;
+      }
+
+      .indicator {
+        width: 6px;
+        height: 6px;
+        border-radius: var(--radius-round);
+        background: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .indicator.active {
+        background: var(--accent);
+        width: 16px;
+        border-radius: 3px;
+      }
+
+      /* Horizontal Scroll lists */
+      .horizontal-scroll-list {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding: 8px 4px 16px 4px;
+        margin-bottom: 24px;
+      }
+
+      /* Ad Card Luxury Upgrade */
+      .ad-card {
+        min-width: 220px;
+        width: 220px;
+        background: var(--card-bg);
+        border: 1px solid rgba(10, 24, 40, 0.04);
+        border-radius: var(--radius-md);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition-spring);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .ad-card:hover {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(212, 175, 55, 0.15);
+      }
+
+      .ad-img-container {
+        height: 120px;
+        position: relative;
+        overflow: hidden;
+        background: var(--primary-light);
+      }
+
+      .ad-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .ad-category-badge {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        background: rgba(10, 24, 40, 0.82);
+        backdrop-filter: blur(4px);
+        color: var(--text-white);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        padding: 4px 10px;
+        border-radius: 6px;
+      }
+
+      .btn-favorite-heart {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        border-radius: var(--radius-round);
+        background: rgba(255, 255, 255, 0.94);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        cursor: pointer;
+        color: var(--text-muted);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: var(--transition);
+      }
+
+      .btn-favorite-heart:hover {
+        transform: scale(1.15);
+      }
+
+      .ad-card-body {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex: 1;
+      }
+
+      .ad-office-name {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .ad-location-details {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .ad-card-title {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1.5;
+        height: 38px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .ad-rating-row {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .rating-star {
+        color: #fbbf24;
+      }
+
+      .ad-card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid var(--border-light);
+        padding: 12px 14px 14px 14px;
+        margin-top: auto;
+      }
+
+      .ad-price-section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .ad-price-prefix {
+        font-size: 8px;
+        color: var(--text-muted);
+      }
+
+      .ad-price-value {
+        font-size: 16px;
+        font-weight: 900;
+        color: var(--primary);
+      }
+
+      .btn-ad-details {
+        background: var(--primary-gradient);
+        color: var(--text-white);
+        border: none;
+        font-size: 11px;
+        font-weight: 800;
+        padding: 8px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .btn-ad-details:hover {
+        background: var(--accent-gradient);
+        color: var(--primary);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+      }
+
+      /* Today's vouchers / Ticket Style coupon design */
+      .today-promo-card {
+        position: relative;
+        display: flex;
+        background: var(--card-bg);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        border: 1px solid rgba(10, 24, 40, 0.04);
+        overflow: visible;
+        margin-bottom: 16px;
+        min-height: 84px;
+        transition: var(--transition);
+      }
+
+      .today-promo-card:hover {
+        transform: scale(1.02);
+        box-shadow: var(--shadow-md);
+      }
+
+      /* Ticket curve cuts on sides */
+      .today-promo-card::before, .today-promo-card::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 14px;
+        height: 14px;
+        background-color: var(--bg-app);
+        border-radius: 50%;
+        transform: translateY(-50%);
+        z-index: 5;
+        box-shadow: inset 2px 0 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .today-promo-card::before {
+        right: -7px;
+        border-left: 1px solid rgba(10, 24, 40, 0.04);
+      }
+
+      .today-promo-card::after {
+        left: -7px;
+        border-right: 1px solid rgba(10, 24, 40, 0.04);
+      }
+
+      .today-promo-text {
+        flex: 1;
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .today-promo-badge {
+        font-size: 9px;
+        font-weight: 800;
+        color: var(--text-white);
+        padding: 3px 10px;
+        border-radius: 6px;
+        width: fit-content;
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+      }
+
+      .today-promo-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: var(--primary);
+        margin-top: 4px;
+        margin-bottom: 2px;
+      }
+
+      .today-promo-subtitle {
+        font-size: 10px;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .today-promo-img {
+        width: 95px;
+        height: auto;
+        object-fit: cover;
+        background: var(--border-light);
+        clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+      }
+
+      /* Most Viewed Offices */
+      .offices-horizontal-scroll {
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+      }
+
+      .office-box-card {
+        min-width: 110px;
+        width: 110px;
+        background: var(--card-bg);
+        border: 1px solid rgba(10, 24, 40, 0.03);
+        border-radius: var(--radius-md);
+        padding: 16px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 6px;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition-spring);
+      }
+
+      .office-box-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-gold);
+        border-color: rgba(212, 175, 55, 0.2);
+      }
+
+      .office-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: var(--radius-round);
+        object-fit: cover;
+        border: 2px solid #ffffff;
+        box-shadow: var(--shadow-md);
+      }
+
+      .office-box-name {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1.3;
+        height: 26px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .office-box-city {
+        font-size: 8px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .office-box-rating {
+        font-size: 8px;
+        font-weight: 700;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        background: var(--bg-app);
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+
+      /* Bottom Glass Nav Bar */
+      .bottom-nav-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 76px;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border-top: 1px solid rgba(10, 24, 40, 0.04);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 500;
+        padding: 0 12px;
+        box-shadow: 0 -10px 30px rgba(10, 24, 40, 0.06);
+      }
+
+      @media (min-width: 481px) {
+        .bottom-nav-container {
+          border-bottom-left-radius: 16px;
+          border-bottom-right-radius: 16px;
+        }
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 800;
+        gap: 4px;
+        flex: 1;
+        height: 100%;
+        background: none;
+        border: none;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-icon-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition-spring);
+      }
+
+      .nav-item.active .nav-icon-wrapper {
+        transform: translateY(-2px);
+        color: var(--accent);
+      }
+
+      .nav-item-center {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        height: 100%;
+      }
+
+      /* Elevated Pulsing Center Action Button */
+      .btn-center-plus {
+        width: 54px;
+        height: 54px;
+        border-radius: var(--radius-round);
+        background: var(--accent-gradient);
+        color: var(--primary);
+        border: 4px solid #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: absolute;
+        top: -24px;
+        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.35);
+        transition: var(--transition-spring);
+        z-index: 510;
+      }
+
+      /* Pulsing effect ring */
+      .nav-item-center::before {
+        content: '';
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(212, 175, 55, 0.2);
+        top: -20px;
+        z-index: 505;
+        animation: pulse-ring 2s infinite;
+        pointer-events: none;
+      }
+
+      @keyframes pulse-ring {
+        0% { transform: scale(0.95); opacity: 1; }
+        100% { transform: scale(1.4); opacity: 0; }
+      }
+
+      .btn-center-plus:hover {
+        transform: rotate(90deg) scale(1.08);
+        box-shadow: 0 12px 24px rgba(212, 175, 55, 0.5);
+      }
+
+      /* Ad Details Luxury Page */
+      .detail-header-image {
+        width: 100%;
+        height: 280px;
+        position: relative;
+        background: var(--primary);
+      }
+
+      .detail-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .detail-top-bar {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        justify-content: space-between;
+        z-index: 10;
+      }
+
+      .detail-body {
+        background: var(--card-bg);
+        border-top-left-radius: var(--radius-lg);
+        border-top-right-radius: var(--radius-lg);
+        margin-top: -24px;
+        position: relative;
+        z-index: 5;
+        padding: 28px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .detail-category-badge {
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: 5px 14px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 800;
+        width: fit-content;
+      }
+
+      .detail-title {
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--primary);
+        line-height: 1.5;
+      }
+
+      .detail-rating-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: 14px;
+      }
+
+      .detail-rating-box {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .detail-rating-score {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .detail-location {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: 600;
+      }
+
+      .detail-section-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+
+      .detail-desc-text {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.9;
+        font-weight: 600;
+      }
+
+      .detail-highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .detail-highlight-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg-app);
+        padding: 12px 14px;
+        border-radius: var(--radius-md);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary);
+        border: 1px solid rgba(10, 24, 40, 0.03);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .detail-office-panel {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--accent-light);
+        padding: 16px;
+        border-radius: var(--radius-md);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+      }
+
+      .detail-office-img {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-round);
+        object-fit: cover;
+      }
+
+      .detail-office-name-col {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-office-name {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .detail-office-desc {
+        font-size: 9px;
+        color: var(--text-muted);
+      }
+
+      .detail-footer-booking {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border-top: 1px solid var(--border);
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        z-index: 10;
+      }
+
+      .detail-footer-price {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .detail-footer-price-val {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .detail-btn-call {
+        flex: 1;
+        background: var(--primary-gradient);
+        color: var(--text-white);
+        border: none;
+        padding: 14px;
+        border-radius: var(--radius-md);
+        font-size: 14px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(10, 24, 40, 0.2);
+        transition: var(--transition);
+        text-decoration: none;
+      }
+
+      .detail-btn-call:hover {
+        background: var(--accent-gradient);
+        color: var(--primary);
+        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+      }
+
+      /* Login Screen */
+      .login-header {
+        padding: 40px 16px 20px 16px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .login-title {
+        font-size: 24px;
+        font-weight: 900;
+        color: var(--primary);
+      }
+
+      .login-subtitle {
+        font-size: 13px;
+        color: var(--text-muted);
+        max-width: 80%;
+      }
+
+      .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+        background: var(--card-bg);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(10, 24, 40, 0.05);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .form-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .form-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .form-input-icon {
+        position: absolute;
+        right: 14px;
+        color: var(--text-muted);
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 14px 44px 14px 20px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        font-size: 13px;
+        font-weight: 600;
+        outline: none;
+        background: var(--bg-app);
+        transition: var(--transition);
+      }
+
+      .form-input:focus {
+        border-color: var(--accent);
+        background: var(--card-bg);
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+      }
+
+      .login-btn {
+        background: var(--primary-gradient);
+        color: var(--text-white);
+        border: none;
+        padding: 14px;
+        border-radius: var(--radius-md);
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .demo-account-info {
+        background: var(--accent-light);
+        border: 1px dashed var(--accent);
+        padding: 12px;
+        border-radius: var(--radius-md);
+        font-size: 11px;
+        color: #856404;
+        line-height: 1.6;
+        margin-top: 16px;
+      }
+
+      .login-error-message {
+        color: var(--danger);
+        background: var(--danger-light);
+        padding: 10px;
+        border-radius: var(--radius-md);
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      /* Dashboard */
+      .dashboard-header {
+        background: var(--primary-gradient);
+        padding: 24px 16px 40px 16px;
+        color: var(--text-white);
+        border-bottom-left-radius: var(--radius-xl);
+        border-bottom-right-radius: var(--radius-xl);
+        position: relative;
+      }
+
+      .dashboard-office-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .dashboard-office-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .dashboard-office-logo {
+        width: 56px;
+        height: 56px;
+        border-radius: var(--radius-round);
+        border: 3px solid rgba(255, 255, 255, 0.2);
+        object-fit: cover;
+      }
+
+      .dashboard-office-name {
+        font-size: 16px;
+        font-weight: 900;
+        color: var(--accent-light);
+      }
+
+      .btn-logout {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-round);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-white);
+        transition: var(--transition);
+      }
+
+      .dashboard-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: -20px;
+        padding: 0 16px;
+        position: relative;
+        z-index: 10;
+        margin-bottom: 24px;
+      }
+
+      .dashboard-stat-card {
+        background: var(--card-bg);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+        border-radius: var(--radius-md);
+        padding: 12px 8px;
+        text-align: center;
+        box-shadow: var(--shadow-md);
+      }
+
+      .dashboard-stat-card:nth-child(1) { border-top: 3px solid var(--accent); }
+      .dashboard-stat-card:nth-child(2) { border-top: 3px solid var(--secondary); }
+      .dashboard-stat-card:nth-child(3) { border-top: 3px solid #3b82f6; }
+
+      .stat-val {
+        font-size: 18px;
+        font-weight: 900;
+        color: var(--primary);
+      }
+
+      .stat-lbl {
+        font-size: 9px;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .dashboard-actions-panel {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding: 0 4px;
+      }
+
+      .dashboard-sec-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .btn-add-new-ad {
+        background: var(--accent-gradient);
+        color: var(--primary);
+        border: none;
+        padding: 8px 14px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 10px rgba(212, 175, 55, 0.25);
+        transition: var(--transition);
+      }
+
+      .my-ad-row-card {
+        display: flex;
+        background: var(--card-bg);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-light);
+        overflow: hidden;
+        margin-bottom: 12px;
+        box-shadow: var(--shadow-sm);
+        height: 90px;
+      }
+
+      .my-ad-img {
+        width: 90px;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .my-ad-info {
+        flex: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .my-ad-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--primary);
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .my-ad-footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .my-ad-price {
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .btn-delete-ad {
+        background: var(--danger-light);
+        color: var(--danger);
+        border: none;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      .back-btn-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .btn-back-text {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* Loader */
+      .loader-spinner {
+        border: 3px solid rgba(var(--primary-rgb), 0.1);
+        border-radius: 50%;
+        border-top: 3px solid var(--accent);
+        width: 24px;
+        height: 24px;
+        animation: spin 0.8s linear infinite;
+        margin: 20px auto;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .empty-state-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 16px;
+        text-align: center;
+        color: var(--text-muted);
+        gap: 16px;
+      }
+
+      .empty-state-icon {
+        width: 72px;
+        height: 72px;
+        border-radius: var(--radius-round);
+        background: var(--border-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light);
+      }
+
+      .empty-state-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .empty-state-desc {
+        font-size: 11px;
+        max-width: 80%;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React Application Logic -->
+    <script type="text/babel">
+      const { useState, useEffect, useRef } = React;
+
+      // --- MOCK DATABASE DATA & SIMULATED FUNCTIONS ---
+      const INITIAL_OFFICES = [
+        {
+          id: "off-1",
+          name: "مكتب الصفوة للخدمات",
+          city: "مكة المكرمة",
+          rating: 4.9,
+          views: 1250,
+          logo: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=120&h=120&q=80",
+          description: "مكتب متخصص في تقديم خدمات العمرة والحج الفاخرة وتأشيرات الدخول مع السكن الفندقي المميز القريب من الحرم."
+        },
+        {
+          id: "off-2",
+          name: "مكتب الإيمان للنقل والعمرة",
+          city: "الرياض",
+          rating: 4.8,
+          views: 980,
+          logo: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&w=120&h=120&q=80",
+          description: "نقدم رحلات عمرة أسبوعية بالباصات الحديثة من الرياض إلى مكة المكرمة والعودة، مع تأمين السكن والمزارات."
+        },
+        {
+          id: "off-3",
+          name: "مكتب التوفيق للتأشيرات",
+          city: "جدة",
+          rating: 4.7,
+          views: 870,
+          logo: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=120&h=120&q=80",
+          description: "تخليص وتجهيز كافة أنواع التأشيرات السياحية، التجارية، العائلية، والدراسية بأسرع وقت وأقل تكلفة."
+        },
+        {
+          id: "off-4",
+          name: "مكتب المحبة للشحن الدولي",
+          city: "المدينة المنورة",
+          rating: 4.9,
+          views: 750,
+          logo: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=120&h=120&q=80",
+          description: "خدمات شحن جوي وبري وبحري من المدينة المنورة إلى جميع أنحاء العالم مع التغليف الآمن والتخليص الجمركي."
+        }
+      ];
+
+      const INITIAL_ADS = [
+        {
+          id: "ad-1",
+          title: "مكتب رحلة الإيمان - نقل بري وجوي",
+          category: "نقل",
+          city: "الرياض",
+          price: 350,
+          rating: 4.8,
+          reviews: 124,
+          image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+          officeId: "off-2",
+          officeName: "مكتب الإيمان للنقل والعمرة",
+          phone: "+966501234567",
+          description: "رحلات نقل يومية من الرياض إلى مكة المكرمة وجدة والمدينة المنورة بواسطة أحدث الباصات المجهزة بسبل الراحة والتكييف وخدمة الواي فاي المجانية.",
+          highlights: ["باصات VIP حديثة", "انطلاق يومي مجدول", "شاشات عرض خاصة وشواحن هواتف", "مشروبات ووجبات خفيفة مجانية"],
+          features: "يشمل النقل والعودة ووجبة خفيفة ومياه معدنية مجانية خلال الرحلة."
+        },
+        {
+          id: "ad-2",
+          title: "مكتب نور الهدى - برامج عمرة مميزة",
+          category: "عمرة",
+          city: "مكة المكرمة",
+          price: 1250,
+          rating: 4.9,
+          reviews: 215,
+          image: "https://images.unsplash.com/photo-1565552110934-2f3b8d0a3e0b?auto=format&fit=crop&w=800&q=80",
+          officeId: "off-1",
+          officeName: "مكتب الصفوة للخدمات",
+          phone: "+966507654321",
+          description: "برنامج عمرة مميز لمدة 4 أيام يشمل السكن في فندق 5 نجوم مطل على الحرم المكي مباشرة، شامل وجبة الإفطار والمواصلات الداخلية والنقل من وإلى المطار.",
+          highlights: ["فندق 5 نجوم (شيراتون جبل الكعبة)", "غرف ثنائية وثلاثية فاخرة", "مواصلات حديثة مكيفة", "إرشاد ديني ومرافقة طوال الرحلة"],
+          features: "السعر يشمل السكن لـ 3 ليالي مع الإفطار البوفيه، والتصاريح عبر تطبيق نسك."
+        },
+        {
+          id: "ad-3",
+          title: "مكتب إنجاز للخدمات والتأشيرات",
+          category: "تأشيرات",
+          city: "الرياض",
+          price: 450,
+          rating: 4.7,
+          reviews: 98,
+          image: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=800&q=80",
+          officeId: "off-3",
+          officeName: "مكتب التوفيق للتأشيرات",
+          phone: "+966509998887",
+          description: "نقدم خدمة استخراج التأشيرة السياحية والتجارية والزيارة العائلية بأسرع وقت مع تعبئة كافة النماذج وتأمين التأمين الطبي المطلوب للسفر بكل سهولة ويسر.",
+          highlights: ["تخليص سريع خلال 48 ساعة", "تأمين طبي معتمد ومتكامل", "تجهيز ملف السفارات والمقابلات", "دعم فني واستشارات مجانية"],
+          features: "لا تشمل الرسوم الحكومية الخاصة بالسفارات، السعر لخدمة المكتب والتنسيق والتأمين الطبي الأساسي."
+        },
+        {
+          id: "ad-4",
+          title: "برنامج حج متميز ومتنوع لعام 1447هـ",
+          category: "حج",
+          city: "مكة المكرمة",
+          price: 9500,
+          rating: 4.9,
+          reviews: 350,
+          image: "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=800&q=80",
+          officeId: "off-1",
+          officeName: "مكتب الصفوة للخدمات",
+          phone: "+966507654321",
+          description: "البرنامج الشامل لخدمة حجاج بيت الله الحرام. مخيمات مطورة فئة أ (مجرب) قريبة من الجمرات، تنقلات بقطار المشاعر وباصات مكيفة خاصة، بوفيه مفتوح وخدمات طبية وإرشادية على مدار الساعة.",
+          highlights: ["مخيمات فئة أ مكيفة ومجهزة بالكامل", "بوفيه مفتوح للوجبات الثلاث", "تذاكر قطار المشاعر المقدسة", "كوادر طبية ودعوية مرافقة"],
+          features: "السعر شامل تصريح الحج الرسمي والتنقلات من كافة مناطق المملكة."
+        },
+        {
+          id: "ad-5",
+          title: "شحن دولي جوي وبري سريع",
+          category: "شحن",
+          city: "جدة",
+          price: 180,
+          rating: 4.8,
+          reviews: 76,
+          image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+          officeId: "off-4",
+          officeName: "مكتب المحبة للشحن الدولي",
+          phone: "+966505554443",
+          description: "شحن البضائع والطرود الشخصية والهدايا من المملكة العربية السعودية إلى كافة الدول العربية والأوروبية بأسعار منافسة. نوفر خدمة التغليف المجاني واستلام الطرود من المنزل.",
+          highlights: ["شحن سريع خلال 5 - 7 أيام عمل", "تأمين على الشحنات القيمة", "تتبع الشحنات أونلاين على مدار الساعة", "تغليف آمن ومقاوم للشحنات"],
+          features: "السعر يبدأ من 180 ريال للـ 5 كيلوجرام الأولى، ويختلف باختلاف الوزن والوجهة."
+        }
+      ];
+
+      const INITIAL_PROMOS = [
+        {
+          id: "promo-1",
+          title: "عرض العمرة الذهبي",
+          subtitle: "فنادق 5 نجوم بالقرب من الحرم المكي الشريف",
+          price: 890,
+          priceLabel: "إبتداءً من",
+          cta: "احجز الآن",
+          image: "https://images.unsplash.com/photo-1565552110934-2f3b8d0a3e0b?auto=format&fit=crop&w=1200&q=80",
+          badge: "عرض خاص"
+        },
+        {
+          id: "promo-2",
+          title: "عرض النقل المميز VIP",
+          subtitle: "رحلات ذهاب وعودة مكة - المدينة باصات فاخرة",
+          price: 150,
+          priceLabel: "للشخص الواحد",
+          cta: "احجز مقعدك",
+          image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+          badge: "توفير"
+        }
+      ];
+
+      const PROVINCES = ["الكل", "الرياض", "مكة المكرمة", "المدينة المنورة", "جدة", "الدمام", "الخبر"];
+
+      let adsDb = [...INITIAL_ADS];
+      let favoritesDb = [];
+
+      const dataService = {
+        async getProvinces() { return PROVINCES; },
+        async getAds(filter = {}) {
+          let result = [...adsDb];
+          if (filter.category && filter.category !== "الكل") result = result.filter(ad => ad.category === filter.category);
+          if (filter.city && filter.city !== "الكل") result = result.filter(ad => ad.city === filter.city);
+          if (filter.searchQuery) {
+            const query = filter.searchQuery.toLowerCase();
+            result = result.filter(ad => ad.title.toLowerCase().includes(query) || ad.description.toLowerCase().includes(query) || ad.officeName.toLowerCase().includes(query));
+          }
+          if (filter.officeId) result = result.filter(ad => ad.officeId === filter.officeId);
+          return result;
+        },
+        async getAdById(id) {
+          const ad = adsDb.find(a => a.id === id);
+          if (!ad) throw new Error("الإعلان غير موجود");
+          return { ...ad };
+        },
+        async getOffices() { return INITIAL_OFFICES; },
+        async getPromos() { return INITIAL_PROMOS; },
+        async loginOffice(email, password) {
+          if (email === "nabil@makateb.com" && password === "123456") {
+            return {
+              uid: "off-1",
+              name: "مكتب الصفوة للخدمات",
+              logo: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=120&h=120&q=80",
+              city: "مكة المكرمة",
+              views: 1250
+            };
+          }
+          throw new Error("البريد الإلكتروني أو كلمة المرور غير صحيحة. استخدم nabil@makateb.com");
+        },
+        async addAd(adData) {
+          const newAd = {
+            id: `ad-${Date.now()}`,
+            rating: 5.0,
+            reviews: 0,
+            ...adData,
+            highlights: adData.highlights ? adData.highlights.split("\n").filter(h => h.trim() !== "") : []
+          };
+          adsDb = [newAd, ...adsDb];
+          return newAd;
+        },
+        async deleteAd(id) {
+          adsDb = adsDb.filter(ad => ad.id !== id);
+          return true;
+        },
+        async toggleFavorite(id) {
+          if (favoritesDb.includes(id)) {
+            favoritesDb = favoritesDb.filter(fid => fid !== id);
+            return false;
+          }
+          favoritesDb.push(id);
+          return true;
+        },
+        async isFavorite(id) { return favoritesDb.includes(id); },
+        async getFavorites() { return adsDb.filter(ad => favoritesDb.includes(ad.id)); }
+      };
+
+      // --- COMPONENTS ---
+
+      function useLucide() {
+        useEffect(() => {
+          if (window.lucide) {
+            window.lucide.createIcons();
+          }
+        });
+      }
+
+      function Header({ selectedCity, setSelectedCity }) {
+        const [open, setOpen] = useState(false);
+        useLucide();
+        return (
+          <header className="header-wrapper">
+            <button className="btn-action-circle" onClick={() => alert("لا توجد إشعارات جديدة")}>
+              <div style={{ position: 'relative' }}>
+                <i data-lucide="bell" style={{ width: 20, height: 20 }}></i>
+                <span style={{ position: 'absolute', top: -2, left: -2, width: 8, height: 8, backgroundColor: 'var(--danger)', borderRadius: '50%' }} />
+              </div>
+            </button>
+
+            <div className="app-logo-section">
+              <div className="app-title-container" style={{ alignItems: 'center' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="var(--primary)" />
+                    <path d="M2 17L12 22L22 17V7L12 12L2 7V17Z" fill="var(--primary-light)" />
+                  </svg>
+                  <h1 className="app-title">مكاتب</h1>
+                </div>
+              </div>
+            </div>
+
+            <button className="location-selector" onClick={() => setOpen(true)}>
+              <i data-lucide="map-pin" style={{ width: 14, height: 14, color: 'var(--accent)' }}></i>
+              <span>{selectedCity === "الكل" ? "كل المدن" : selectedCity}</span>
+              <i data-lucide="chevron-down" style={{ width: 12, height: 12 }}></i>
+            </button>
+
+            {open && (
+              <div className="modal-overlay" onClick={() => setOpen(false)}>
+                <div className="modal-content" onClick={e => e.stopPropagation()}>
+                  <div className="modal-header">
+                    <h3 className="modal-title">اختر المدينة</h3>
+                    <button className="btn-close" onClick={() => setOpen(false)}><i data-lucide="x" style={{ width: 16, height: 16 }}></i></button>
+                  </div>
+                  <div className="grid-list-cities">
+                    {PROVINCES.map(c => (
+                      <button key={c} className={`btn-city ${selectedCity === c ? 'active' : ''}`} onClick={() => { setSelectedCity(c); setOpen(false); }}>
+                        {c === "الكل" ? "كل المدن" : c}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </header>
+        );
+      }
+
+      function SearchBar({ value, onChange }) {
+        useLucide();
+        return (
+          <div className="search-container">
+            <div className="search-input-wrapper">
+              <input type="text" className="search-input" placeholder="ابحث عن مكتب، خدمة أو رحلة..." value={value} onChange={e => onChange(e.target.value)} />
+              <i data-lucide="search" className="search-icon" style={{ width: 18, height: 18 }}></i>
+              <button className="filter-btn" onClick={() => alert("ميزة التصفية المتقدمة متوفرة بالبحث بالأسفل")}><i data-lucide="sliders" style={{ width: 16, height: 16 }}></i></button>
+            </div>
+          </div>
+        );
+      }
+
+      function ServicesGrid({ activeCategory, setActiveCategory }) {
+        useLucide();
+        const cats = [
+          { id: "عمرة", title: "عمرة", desc: "عمرة مميزة", image: "https://images.unsplash.com/photo-1565552110934-2f3b8d0a3e0b?auto=format&fit=crop&w=200&h=200&q=80" },
+          { id: "حج", title: "حج", desc: "حج متنوعة", image: "https://images.unsplash.com/photo-1591604466107-ec97de577aff?auto=format&fit=crop&w=200&h=200&q=80" },
+          { id: "تأشيرات", title: "تأشيرات", desc: "جميع أنواع التأشيرات", image: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?auto=format&fit=crop&w=200&h=200&q=80" },
+          { id: "نقل", title: "نقل", desc: "نقل بري وجوي", image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=120&q=80" },
+          { id: "شحن", title: "شحن", desc: "شحن داخلي ودولي", image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=120&q=80" }
+        ];
+
+        return (
+          <div>
+            <div className="services-grid">
+              {cats.slice(0, 3).map(c => (
+                <div key={c.id} className="service-card" style={{
+                  borderColor: activeCategory === c.id ? 'var(--accent)' : 'rgba(10, 24, 40, 0.04)',
+                  background: activeCategory === c.id ? 'var(--accent-light)' : 'var(--card-bg)',
+                  boxShadow: activeCategory === c.id ? 'var(--shadow-gold)' : 'var(--shadow-sm)'
+                }} onClick={() => setActiveCategory(activeCategory === c.id ? "الكل" : c.id)}>
+                  <img src={c.image} alt={c.title} className="service-img" />
+                  <h3 className="service-title" style={{ marginBottom: '4px' }}>{c.title}</h3>
+                  <div className="service-arrow-btn" style={{ background: activeCategory === c.id ? 'var(--accent-gradient)' : 'var(--primary-gradient)', color: activeCategory === c.id ? 'var(--primary)' : '#fff' }}>
+                    <i data-lucide="arrow-right" style={{ width: 10, height: 10, transform: 'rotate(180deg)' }}></i>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="services-grid-two-cols">
+              {cats.slice(3, 5).map(c => (
+                <div key={c.id} className="service-card" style={{
+                  flexDirection: 'row', justifyContent: 'space-between', padding: '9px 12px', /* Shrunk by 25% */
+                  borderColor: activeCategory === c.id ? 'var(--accent)' : 'rgba(10, 24, 40, 0.04)',
+                  background: activeCategory === c.id ? 'var(--accent-light)' : 'var(--card-bg)',
+                  boxShadow: activeCategory === c.id ? 'var(--shadow-gold)' : 'var(--shadow-sm)'
+                }} onClick={() => setActiveCategory(activeCategory === c.id ? "الكل" : c.id)}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <img src={c.image} alt={c.title} style={{ width: 40, height: 22, objectFit: 'cover', borderRadius: '4px' }} />
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <h3 className="service-title" style={{ marginBottom: 0 }}>{c.title}</h3>
+                    </div>
+                  </div>
+                  <div className="service-arrow-btn" style={{ margin: 0, background: activeCategory === c.id ? 'var(--accent-gradient)' : 'var(--primary-gradient)', color: activeCategory === c.id ? 'var(--primary)' : '#fff' }}>
+                    <i data-lucide="arrow-right" style={{ width: 10, height: 10, transform: 'rotate(180deg)' }}></i>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      function PromoSlider({ promos }) {
+        const [active, setActive] = useState(0);
+        useLucide();
+
+        useEffect(() => {
+          if (!promos || promos.length === 0) return;
+          const t = setInterval(() => { setActive(a => (a + 1) % promos.length); }, 4000);
+          return () => clearInterval(t);
+        }, [promos.length]);
+
+        if (!promos || promos.length === 0) return null;
+
+        return (
+          <div className="promo-slider-container">
+            <div className="promo-track" style={{ transform: `translateX(${active * 100}%)` }}>
+              {promos.map((p, i) => (
+                <div key={p.id} className="promo-slide" style={{ backgroundImage: `url(${p.image})`, transform: `translateX(-${i * 100}%)` }}>
+                  <div className="promo-overlay" />
+                  <span className="promo-badge">{p.badge}</span>
+                  <div className="promo-content">
+                    <h2 className="promo-title">{p.title}</h2>
+                    <p className="promo-subtitle">{p.subtitle}</p>
+                    <div className="promo-footer">
+                      <div className="promo-price-wrapper">
+                        <span style={{ fontSize: 9, opacity: 0.8 }}>{p.priceLabel}</span>
+                        <span className="promo-price">{p.price}</span>
+                        <span style={{ fontSize: 10 }}> ريال</span>
+                      </div>
+                      <button className="promo-cta-btn" onClick={() => alert(`حجز العرض: ${p.title}`)}>{p.cta}</button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="slider-indicators">
+              {promos.map((_, i) => (
+                <span key={i} className={`indicator ${active === i ? 'active' : ''}`} onClick={() => setActive(i)} />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      function AdCard({ ad, onDetailClick }) {
+        const [isFav, setIsFav] = useState(false);
+        useLucide();
+        useEffect(() => {
+          dataService.isFavorite(ad.id).then(setIsFav);
+        }, [ad.id]);
+
+        return (
+          <div className="ad-card" onClick={() => onDetailClick(ad.id)}>
+            <div className="ad-img-container">
+              <img src={ad.image} alt={ad.title} className="ad-img" />
+              <span className="ad-category-badge">{ad.category}</span>
+              <button className="btn-favorite-heart" onClick={async e => {
+                e.stopPropagation();
+                const updated = await dataService.toggleFavorite(ad.id);
+                setIsFav(updated);
+              }}>
+                <i data-lucide="heart" style={{ width: 16, height: 16, color: isFav ? 'var(--danger)' : 'var(--text-muted)' }} fill={isFav ? 'var(--danger)' : 'none'}></i>
+              </button>
+            </div>
+            <div className="ad-card-body">
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <span className="ad-office-name">{ad.officeName}</span>
+                <span className="ad-rating-row"><i data-lucide="star" style={{ width: 12, height: 12 }} fill="currentColor" className="rating-star"></i> {ad.rating}</span>
+              </div>
+              <h3 className="ad-card-title">{ad.title}</h3>
+              <div className="ad-location-details"><i data-lucide="map-pin" style={{ width: 12, height: 12, color: 'var(--accent)' }}></i> {ad.city}</div>
+            </div>
+            <div className="ad-card-footer">
+              <div className="ad-price-section">
+                <span className="ad-price-prefix">تبدأ من</span>
+                <span className="ad-price-value">{ad.price} <span style={{ fontSize: 9 }}>ريال</span></span>
+              </div>
+              <button className="btn-ad-details">عرض التفاصيل</button>
+            </div>
+          </div>
+        );
+      }
+
+      function BottomNav({ activeTab, setActiveTab, isLoggedIn }) {
+        useLucide();
+        return (
+          <div className="bottom-nav-container">
+            <button className={`nav-item ${activeTab === 'home' ? 'active' : ''}`} onClick={() => setActiveTab('home')}>
+              <div className="nav-icon-wrapper"><i data-lucide="home" style={{ width: 22, height: 22 }}></i></div>
+              <span>الرئيسية</span>
+            </button>
+            <button className={`nav-item ${activeTab === 'search' ? 'active' : ''}`} onClick={() => setActiveTab('search')}>
+              <div className="nav-icon-wrapper"><i data-lucide="search" style={{ width: 22, height: 22 }}></i></div>
+              <span>البحث</span>
+            </button>
+            <div className="nav-item-center">
+              <button className="btn-center-plus" onClick={() => setActiveTab(isLoggedIn ? 'dashboard-add' : 'login')}>
+                <i data-lucide="plus" style={{ width: 26, height: 26 }}></i>
+              </button>
+              <span style={{ fontSize: '9px', fontWeight: '800', color: 'var(--text-muted)', marginTop: '24px', position: 'absolute', bottom: '6px' }}>أضف إعلان</span>
+            </div>
+            <button className={`nav-item ${activeTab === 'favorites' ? 'active' : ''}`} onClick={() => setActiveTab('favorites')}>
+              <div className="nav-icon-wrapper"><i data-lucide="heart" style={{ width: 22, height: 22 }}></i></div>
+              <span>المفضلة</span>
+            </button>
+            <button className={`nav-item ${['login', 'dashboard', 'dashboard-add'].includes(activeTab) ? 'active' : ''}`} onClick={() => setActiveTab(isLoggedIn ? 'dashboard' : 'login')}>
+              <div className="nav-icon-wrapper"><i data-lucide="user" style={{ width: 22, height: 22 }}></i></div>
+              <span>حسابي</span>
+            </button>
+          </div>
+        );
+      }
+
+      // --- PAGES ---
+
+      function Home({ onAdDetailClick, activeCategory, setActiveCategory, selectedCity, setSelectedCity }) {
+        const [query, setQuery] = useState('');
+        const [ads, setAds] = useState([]);
+        const [promos, setPromos] = useState([]);
+        const [offices, setOffices] = useState([]);
+        const [loading, setLoading] = useState(true);
+        useLucide();
+
+        useEffect(() => {
+          Promise.all([dataService.getPromos(), dataService.getOffices()]).then(([p, o]) => {
+            setPromos(p);
+            setOffices(o);
+          });
+        }, []);
+
+        useEffect(() => {
+          setLoading(true);
+          dataService.getAds({ category: activeCategory, city: selectedCity, searchQuery: query }).then(list => {
+            setAds(list);
+            setLoading(false);
+          });
+        }, [activeCategory, selectedCity, query]);
+
+        return (
+          <div>
+            <Header selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
+            <SearchBar value={query} onChange={setQuery} />
+            <ServicesGrid activeCategory={activeCategory} setActiveCategory={setActiveCategory} />
+            <PromoSlider promos={promos} />
+            
+            <div className="section-title-wrapper">
+              <h2 className="section-title">أحدث الإعلانات</h2>
+              <span className="section-link" onClick={() => setActiveCategory("الكل")}>عرض الكل <i data-lucide="arrow-left" style={{ width: 10, height: 10 }}></i></span>
+            </div>
+
+            {loading ? <div className="loader-spinner" /> : ads.length === 0 ? (
+              <div className="empty-state-wrapper">
+                <h3 className="empty-state-title">لا توجد نتائج مطابقة</h3>
+              </div>
+            ) : (
+              <div className="horizontal-scroll-list">
+                {ads.map(ad => <AdCard key={ad.id} ad={ad} onDetailClick={onAdDetailClick} />)}
+              </div>
+            )}
+
+            <div className="section-title-wrapper">
+              <h2 className="section-title">عروض اليوم المميزة</h2>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div className="today-promo-card color-1">
+                <div className="today-promo-text">
+                  <span className="today-promo-badge">عمرة اقتصادية</span>
+                  <h3 className="today-promo-title">برامج فنادق 5 نجوم</h3>
+                  <p className="today-promo-subtitle">خصم مميز يبدأ من 850 ريال فقط شامل الإقامة والتصاريح</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1565552110934-2f3b8d0a3e0b?auto=format&fit=crop&w=140&q=80" className="today-promo-img" />
+              </div>
+              <div className="today-promo-card color-2">
+                <div className="today-promo-text">
+                  <span className="today-promo-badge">شحن دولي</span>
+                  <h3 className="today-promo-title">خصم %26 كامل</h3>
+                  <p className="today-promo-subtitle">على جميع طرود الهدايا والأمتعة المشحونة برياً وجوياً</p>
+                </div>
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=140&q=80" className="today-promo-img" />
+              </div>
+            </div>
+
+            <div className="section-title-wrapper">
+              <h2 className="section-title">المكاتب الأكثر مشاهدة</h2>
+            </div>
+            <div className="offices-horizontal-scroll">
+              {offices.map(o => (
+                <div key={o.id} className="office-box-card">
+                  <img src={o.logo} className="office-logo" />
+                  <h4 className="office-box-name">{o.name}</h4>
+                  <span className="office-box-city">{o.city}</span>
+                  <div className="office-box-rating"><i data-lucide="star" style={{ width: 10, height: 10 }} fill="currentColor" className="rating-star"></i> {o.rating}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      // --- DETAILED PAGE ---
+      function AdDetails({ adId, onBackClick }) {
+        const [ad, setAd] = useState(null);
+        const [isFav, setIsFav] = useState(false);
+        const [loading, setLoading] = useState(true);
+        useLucide();
+
+        useEffect(() => {
+          dataService.getAdById(adId).then(adData => {
+            setAd(adData);
+            dataService.isFavorite(adId).then(setIsFav);
+            setLoading(false);
+          });
+        }, [adId]);
+
+        if (loading) return <div className="loader-spinner" />;
+        if (!ad) return <div className="empty-state-wrapper">الإعلان غير موجود</div>;
+
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div className="detail-header-image">
+              <img src={ad.image} className="detail-img" />
+              <div className="detail-top-bar">
+                <button className="btn-action-circle" onClick={onBackClick}><i data-lucide="arrow-right" style={{ width: 20, height: 20 }}></i></button>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button className="btn-action-circle" onClick={() => alert("تم نسخ رابط المشاركة!")}><i data-lucide="share-2" style={{ width: 18, height: 18 }}></i></button>
+                  <button className="btn-action-circle" onClick={async () => {
+                    const u = await dataService.toggleFavorite(ad.id);
+                    setIsFav(u);
+                  }}><i data-lucide="heart" style={{ width: 18, height: 18, color: isFav ? 'var(--danger)' : 'var(--text-muted)' }} fill={isFav ? 'var(--danger)' : 'none'}></i></button>
+                </div>
+              </div>
+            </div>
+
+            <div className="detail-body">
+              <span className="detail-category-badge">{ad.category}</span>
+              <h2 className="detail-title">{ad.title}</h2>
+              <div className="detail-rating-row">
+                <div className="detail-rating-box">
+                  <i data-lucide="star" style={{ width: 16, height: 16 }} fill="currentColor" className="rating-star"></i>
+                  <span className="detail-rating-score">{ad.rating}</span>
+                </div>
+                <div className="detail-location"><i data-lucide="map-pin" style={{ width: 14, height: 14, color: 'var(--accent)' }}></i> {ad.city}</div>
+              </div>
+
+              <div>
+                <h3 className="detail-section-title">تفاصيل الخدمة</h3>
+                <p className="detail-desc-text">{ad.description}</p>
+              </div>
+
+              {ad.highlights && ad.highlights.length > 0 && (
+                <div>
+                  <h3 className="detail-section-title">أبرز المميزات</h3>
+                  <div className="detail-highlights-grid">
+                    {ad.highlights.map((h, i) => (
+                      <div key={i} className="detail-highlight-item">
+                        <i data-lucide="check-circle" style={{ width: 14, height: 14, color: 'var(--secondary)' }}></i>
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="detail-office-panel">
+                <div className="detail-office-name-col">
+                  <span className="detail-office-name">{ad.officeName}</span>
+                  <span className="detail-office-desc">مكتب معتمد ومرخص لتقديم الخدمات في المملكة</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="detail-footer-booking">
+              <div className="detail-footer-price">
+                <span style={{ fontSize: 9 }}>السعر الإجمالي</span>
+                <span className="detail-footer-price-val">{ad.price} <span style={{ fontSize: 12 }}>ريال</span></span>
+              </div>
+              <a href={`tel:${ad.phone}`} className="detail-btn-call" style={{ textAlign: 'center', color: '#fff' }}>
+                <i data-lucide="phone" style={{ width: 16, height: 16, display: 'inline', verticalAlign: 'middle', marginLeft: 6 }}></i>
+                <span>اتصال بالمكتب</span>
+              </a>
+            </div>
+          </div>
+        );
+      }
+
+      function Login({ onLoginSuccess, onBackHome }) {
+        const [email, setEmail] = useState('');
+        const [password, setPassword] = useState('');
+        const [error, setError] = useState('');
+        useLucide();
+
+        const handleSubmit = async e => {
+          e.preventDefault();
+          setError('');
+          try {
+            const user = await dataService.loginOffice(email, password);
+            onLoginSuccess(user);
+          } catch(err) {
+            setError(err.message);
+          }
+        };
+
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div style={{ padding: 16 }}><button className="btn-back-text" onClick={onBackHome}><i data-lucide="arrow-right" style={{ width: 16, height: 16 }}></i> <span>الرجوع للرئيسية</span></button></div>
+            <div className="login-header">
+              <h2 className="login-title">تسجيل دخول المكاتب</h2>
+              <p className="login-subtitle">أدخل بيانات الحساب التجريبي بالأسفل لتجربة لوحة التحكم وإضافة إعلاناتك</p>
+            </div>
+            <div style={{ padding: '0 16px' }}>
+              <form className="login-form" onSubmit={handleSubmit}>
+                {error && <div className="login-error-message">{error}</div>}
+                <div className="form-group">
+                  <label className="form-label">البريد الإلكتروني للمكتب</label>
+                  <div className="form-input-wrapper">
+                    <input type="email" className="form-input" value={email} onChange={e => setEmail(e.target.value)} required />
+                    <i data-lucide="mail" className="form-input-icon" style={{ width: 16, height: 16 }}></i>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label className="form-label">كلمة المرور</label>
+                  <div className="form-input-wrapper">
+                    <input type="password" className="form-input" value={password} onChange={e => setPassword(e.target.value)} required />
+                    <i data-lucide="lock" className="form-input-icon" style={{ width: 16, height: 16 }}></i>
+                  </div>
+                </div>
+                <button type="submit" className="login-btn">دخول لوحة التحكم</button>
+              </form>
+
+              <div className="demo-account-info">
+                <strong>💡 بيانات التجربة الافتراضية:</strong>
+                <div>البريد الإلكتروني: <code>nabil@makateb.com</code></div>
+                <div>كلمة المرور: <code>123456</code></div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      function Dashboard({ officeUser, onLogout, initialAdd }) {
+        const [ads, setAds] = useState([]);
+        const [isAdding, setIsAdding] = useState(initialAdd);
+        
+        // Add Ad States
+        const [title, setTitle] = useState('');
+        const [category, setCategory] = useState('عمرة');
+        const [city, setCity] = useState('الرياض');
+        const [price, setPrice] = useState('');
+        const [desc, setDesc] = useState('');
+        const [hlights, setHlights] = useState('');
+        useLucide();
+
+        const loadAds = () => {
+          dataService.getAds({ officeId: officeUser.uid }).then(setAds);
+        };
+
+        useEffect(() => { loadAds(); }, [officeUser.uid]);
+
+        const handleDelete = async id => {
+          if (confirm("هل تريد حذف هذا الإعلان؟")) {
+            await dataService.deleteAd(id);
+            loadAds();
+          }
+        };
+
+        const handleAdd = async e => {
+          e.preventDefault();
+          const ad = {
+            title, category, city, price: Number(price),
+            description: desc, highlights: hlights,
+            officeId: officeUser.uid, officeName: officeUser.name,
+            phone: "+966507654321",
+            image: category === 'عمرة' ? "https://images.unsplash.com/photo-1565552110934-2f3b8d0a3e0b?auto=format&fit=crop&w=800&q=80" : 
+                   category === 'نقل' ? "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" : 
+                   "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+          };
+          await dataService.addAd(ad);
+          setTitle(''); setPrice(''); setDesc(''); setHlights('');
+          setIsAdding(false);
+          loadAds();
+          alert("تم نشر الإعلان بنجاح!");
+        };
+
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+            <div className="dashboard-header">
+              <div className="dashboard-office-row">
+                <div className="dashboard-office-info">
+                  <img src={officeUser.logo} className="dashboard-office-logo" />
+                  <div>
+                    <h2 className="dashboard-office-name">{officeUser.name}</h2>
+                    <span style={{ fontSize: 10, opacity: 0.8 }}>لوحة التحكم الرسمية</span>
+                  </div>
+                </div>
+                <button className="btn-logout" onClick={onLogout}><i data-lucide="log-out" style={{ width: 18, height: 18 }}></i></button>
+              </div>
+            </div>
+
+            <div className="dashboard-stats-grid">
+              <div className="dashboard-stat-card"><span className="stat-val">{ads.length}</span><br /><span className="stat-lbl">إعلانات نشطة</span></div>
+              <div className="dashboard-stat-card"><span className="stat-val">{officeUser.views}</span><br /><span className="stat-lbl">مشاهدات</span></div>
+              <div className="dashboard-stat-card"><span className="stat-val">★ 4.9</span><br /><span className="stat-lbl">تقييم المكتب</span></div>
+            </div>
+
+            <div style={{ padding: '0 16px', flex: 1 }}>
+              {isAdding ? (
+                <div>
+                  <div className="back-btn-row"><button className="btn-back-text" onClick={() => setIsAdding(false)}><i data-lucide="arrow-right" style={{ width: 16, height: 16 }}></i> <span>رجوع لإعلاناتي</span></button></div>
+                  <form className="login-form" onSubmit={handleAdd} style={{ marginBottom: 30 }}>
+                    <div className="form-group">
+                      <label className="form-label">عنوان الإعلان</label>
+                      <input type="text" className="form-input" placeholder="رحلة عمرة فاخرة" value={title} onChange={e => setTitle(e.target.value)} required />
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+                      <div className="form-group">
+                        <label className="form-label">القسم</label>
+                        <select className="form-input" value={category} onChange={e => setCategory(e.target.value)} style={{ appearance: 'auto', height: 45 }}>
+                          <option value="عمرة">عمرة</option><option value="حج">حج</option><option value="تأشيرات">تأشيرات</option><option value="نقل">نقل</option><option value="شحن">شحن</option>
+                        </select>
+                      </div>
+                      <div className="form-group">
+                        <label className="form-label">المدينة</label>
+                        <select className="form-input" value={city} onChange={e => setCity(e.target.value)} style={{ appearance: 'auto', height: 45 }}>
+                          {PROVINCES.filter(p => p !== "الكل").map(p => <option key={p} value={p}>{p}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">السعر (ريال)</label>
+                      <input type="number" className="form-input" value={price} onChange={e => setPrice(e.target.value)} required />
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">الوصف التفصيلي</label>
+                      <textarea className="form-input" value={desc} onChange={e => setDesc(e.target.value)} style={{ minHeight: 60 }} required></textarea>
+                    </div>
+                    <div className="form-group">
+                      <label className="form-label">المميزات (ميزة بكل سطر)</label>
+                      <textarea className="form-input" placeholder="فندق 5 نجوم&#10;شامل المواصلات" value={hlights} onChange={e => setHlights(e.target.value)} style={{ minHeight: 60 }}></textarea>
+                    </div>
+                    <button type="submit" className="login-btn">حفظ ونشر الإعلان</button>
+                  </form>
+                </div>
+              ) : (
+                <div>
+                  <div className="dashboard-actions-panel">
+                    <h3 className="dashboard-sec-title">إعلاناتي</h3>
+                    <button className="btn-add-new-ad" onClick={() => setIsAdding(true)}><i data-lucide="plus" style={{ width: 14, height: 14 }}></i> <span>أضف جديد</span></button>
+                  </div>
+                  {ads.length === 0 ? <div className="empty-state-wrapper">لا توجد إعلانات حالية</div> : (
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                      {ads.map(ad => (
+                        <div key={ad.id} className="my-ad-row-card">
+                          <img src={ad.image} className="my-ad-img" />
+                          <div className="my-ad-info">
+                            <h4 className="my-ad-title">{ad.title}</h4>
+                            <div className="my-ad-footer-row">
+                              <span className="my-ad-price">{ad.price} ريال</span>
+                              <button className="btn-delete-ad" onClick={() => handleDelete(ad.id)}><i data-lucide="trash-2" style={{ width: 14, height: 14 }}></i></button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        const [tab, setTab] = useState('home');
+        const [prev, setPrev] = useState('home');
+        const [selectedId, setSelectedId] = useState(null);
+        
+        // Filters
+        const [activeCategory, setActiveCategory] = useState('الكل');
+        const [selectedCity, setSelectedCity] = useState('الكل');
+
+        // Auth
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
+        const [user, setUser] = useState(null);
+
+        // Favorites
+        const [favs, setFavs] = useState([]);
+        useLucide();
+
+        const handleDetailClick = id => {
+          setPrev(tab);
+          setSelectedId(id);
+          setTab('ad-details');
+        };
+
+        useEffect(() => {
+          if (tab === 'favorites') {
+            dataService.getFavorites().then(setFavs);
+          }
+        }, [tab]);
+
+        return (
+          <div className="app-container">
+            <div className="app-content">
+              {tab === 'home' && (
+                <Home 
+                  onAdDetailClick={handleDetailClick}
+                  activeCategory={activeCategory}
+                  setActiveCategory={setActiveCategory}
+                  selectedCity={selectedCity}
+                  setSelectedCity={setSelectedCity}
+                />
+              )}
+
+              {tab === 'search' && (
+                <div>
+                  <div className="section-title-wrapper"><h2 className="section-title">البحث المتقدم</h2></div>
+                  <div style={{ marginBottom: 14 }}>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)' }}>الخدمة:</span>
+                    <div style={{ display: 'flex', gap: 6, overflowX: 'auto', padding: '6px 0' }}>
+                      {['الكل', 'عمرة', 'حج', 'تأشيرات', 'نقل', 'شحن'].map(c => (
+                        <button key={c} onClick={() => setActiveCategory(c)} style={{
+                          padding: '6px 12px', borderRadius: 8, border: '1px solid var(--border)',
+                          background: activeCategory === c ? 'var(--primary-gradient)' : 'var(--card-bg)',
+                          color: activeCategory === c ? '#fff' : 'var(--text-main)', fontSize: 11, whiteSpace: 'nowrap',
+                          fontWeight: 700
+                        }}>{c}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: 20 }}>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)' }}>المدينة:</span>
+                    <div style={{ display: 'flex', gap: 6, overflowX: 'auto', padding: '6px 0' }}>
+                      {PROVINCES.map(c => (
+                        <button key={c} onClick={() => setSelectedCity(c)} style={{
+                          padding: '6px 12px', borderRadius: 8, border: '1px solid var(--border)',
+                          background: selectedCity === c ? 'var(--accent-gradient)' : 'var(--card-bg)',
+                          color: selectedCity === c ? 'var(--primary)' : 'var(--text-main)', fontSize: 11, whiteSpace: 'nowrap',
+                          fontWeight: 700
+                        }}>{c === "الكل" ? "كل المدن" : c}</button>
+                      ))}
+                    </div>
+                  </div>
+                  <Home 
+                    onAdDetailClick={handleDetailClick}
+                    activeCategory={activeCategory}
+                    setActiveCategory={setActiveCategory}
+                    selectedCity={selectedCity}
+                    setSelectedCity={setSelectedCity}
+                  />
+                </div>
+              )}
+
+              {tab === 'favorites' && (
+                <div>
+                  <div className="section-title-wrapper"><h2 className="section-title">المفضلة</h2></div>
+                  {favs.length === 0 ? (
+                    <div className="empty-state-wrapper">
+                      <div className="empty-state-icon"><i data-lucide="heart" style={{ width: 32, height: 32, color: 'var(--text-light)' }}></i></div>
+                      <h3 className="empty-state-title">القائمة فارغة</h3>
+                      <p className="empty-state-desc">احفظ إعلاناتك المفضلة لتظهر هنا لاحقاً</p>
+                    </div>
+                  ) : (
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                      {favs.map(ad => <AdCard key={ad.id} ad={ad} onDetailClick={handleDetailClick} />)}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {tab === 'login' && (
+                <Login 
+                  onLoginSuccess={u => { setUser(u); setIsLoggedIn(true); setTab('dashboard'); }}
+                  onBackHome={() => setTab('home')}
+                />
+              )}
+
+              {tab === 'dashboard' && (
+                <Dashboard officeUser={user} onLogout={() => { setUser(null); setIsLoggedIn(false); setTab('home'); }} initialAdd={false} />
+              )}
+
+              {tab === 'dashboard-add' && (
+                <Dashboard officeUser={user} onLogout={() => { setUser(null); setIsLoggedIn(false); setTab('home'); }} initialAdd={true} />
+              )}
+
+              {tab === 'ad-details' && (
+                <AdDetails adId={selectedId} onBackClick={() => setTab(prev)} />
+              )}
+            </div>
+
+            {tab !== 'ad-details' && (
+              <BottomNav activeTab={tab} setActiveTab={setTab} isLoggedIn={isLoggedIn} />
+            )}
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
