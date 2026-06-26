@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Globe2, PlaneTakeoff } from 'lucide-react';
+import { Globe2 } from 'lucide-react';
 import './SplashScreen.css';
 
 export default function SplashScreen({ onFinish }) {
@@ -28,9 +28,8 @@ export default function SplashScreen({ onFinish }) {
       <div className="splash-curtain right"></div>
       
       <div className="splash-content">
-        <div className="splash-logo-wrapper" style={{ position: 'relative' }}>
-          <Globe2 size={48} color="#1E3A8A" strokeWidth={1.5} />
-          <PlaneTakeoff size={28} color="#facc15" strokeWidth={2.5} style={{ position: 'absolute', bottom: -8, right: -8, transform: 'rotate(-10deg)' }} />
+        <div className="splash-logo-wrapper">
+          <Globe2 size={64} color="#1E3A8A" strokeWidth={2} />
         </div>
         <h1 className="splash-title">خدمة مكتب</h1>
         
