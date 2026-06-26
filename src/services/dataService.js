@@ -121,18 +121,19 @@ export const dataService = {
     const snapshot = await getDocs(q);
     let result = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
 
-    // Filter out ads from suspended offices
+    // Filter out ads from suspended or pending offices
     try {
       const officesSnap = await getDocs(collection(db, 'offices'));
-      const suspendedOfficeIds = new Set();
+      const hiddenOfficeIds = new Set();
       officesSnap.forEach(doc => {
-        if (doc.data().status === 'suspended') {
-          suspendedOfficeIds.add(doc.id);
+        const status = doc.data().status;
+        if (status === 'suspended' || status === 'pending') {
+          hiddenOfficeIds.add(doc.id);
         }
       });
-      result = result.filter(ad => !suspendedOfficeIds.has(ad.officeId));
+      result = result.filter(ad => !hiddenOfficeIds.has(ad.officeId));
     } catch (e) {
-      console.error("Error filtering suspended offices:", e);
+      console.error("Error filtering offices:", e);
     }
 
     // Local fallback filter to guarantee accuracy
@@ -228,7 +229,7 @@ export const dataService = {
     let result = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
     
     if (!filter.admin) {
-      result = result.filter(office => office.status === 'active');
+      result = result.filter(office => office.status === 'active' || !office.status);
     }
     
     if (filter.city && filter.city !== "الكل") {
