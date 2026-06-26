@@ -2274,8 +2274,7 @@ body::after {
 }
 
 .office-box-card {
-  min-width: 130px;
-  max-width: 145px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2290,6 +2289,19 @@ body::after {
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
+}
+
+.office-box-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 .office-box-card::before {
