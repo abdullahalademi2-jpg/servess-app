@@ -5,15 +5,15 @@ export default function SplashScreen({ onFinish }) {
   const [stage, setStage] = useState('entering');
 
   useEffect(() => {
-    // Wait a bit, then start exit animation
+    // Wait longer, then start exit animation
     const timer = setTimeout(() => {
       setStage('exiting');
-    }, 2500);
+    }, 4500);
 
     // After exit animation finishes, tell App to remove this component
     const finishTimer = setTimeout(() => {
       if (onFinish) onFinish();
-    }, 3300); // slightly longer to allow curtain animation to finish
+    }, 5500); // Wait for the new longer curtain transition
 
     return () => {
       clearTimeout(timer);
