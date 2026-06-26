@@ -5,6 +5,7 @@ export default function Header({ selectedCity, setSelectedCity, provinces }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSupportOpen, setIsSupportOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
   const dropdownRef = useRef(null);
   const menuRef = useRef(null);
 
@@ -70,7 +71,7 @@ export default function Header({ selectedCity, setSelectedCity, provinces }) {
   };
 
   const handleAbout = () => {
-    // تم إيقاف التفعيل بناءً على طلب المستخدم
+    setIsAboutOpen(true);
     setIsMenuOpen(false);
   };
 
@@ -318,6 +319,48 @@ export default function Header({ selectedCity, setSelectedCity, provinces }) {
             onMouseEnter={e => e.currentTarget.style.background = '#e2e8f0'}
             onMouseLeave={e => e.currentTarget.style.background = '#f1f5f9'}>
               إغلاق
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* About Modal */}
+      {isAboutOpen && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.6)', zIndex: 100000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '20px', backdropFilter: 'blur(4px)'
+        }} onClick={() => setIsAboutOpen(false)}>
+          <div style={{
+            background: '#fff', borderRadius: '24px', padding: '24px',
+            width: '100%', maxWidth: '340px', textAlign: 'center',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+          }} onClick={e => e.stopPropagation()}>
+            
+            <div style={{
+              width: '60px', height: '60px', background: '#eff6ff',
+              borderRadius: '50%', display: 'flex', alignItems: 'center',
+              justifyContent: 'center', margin: '0 auto 16px'
+            }}>
+              <Info size={30} color="#3b82f6" />
+            </div>
+
+            <h3 style={{ margin: '0 0 12px 0', color: '#0f172a', fontSize: '20px', fontWeight: '800' }}>حول البرنامج</h3>
+            <p style={{ margin: '0 0 24px 0', color: '#475569', fontSize: '14.5px', lineHeight: '1.7', direction: 'rtl' }}>
+              تطبيق <strong>خدمة مكتب</strong> هو منصتك الرقمية المتكاملة التي تجمع بين جميع خدمات مكاتب السفر والسياحة والخدمات اللوجستية في مكان واحد، لنوفر عليك الوقت والجهد ونضمن لك تجربة مستخدم آمنة وموثوقة.
+            </p>
+
+            <button onClick={() => setIsAboutOpen(false)} style={{
+              background: '#3b82f6', color: '#fff', border: 'none',
+              padding: '14px', width: '100%', borderRadius: '16px',
+              fontWeight: 'bold', cursor: 'pointer', fontSize: '15px',
+              transition: 'all 0.2s',
+              boxShadow: '0 4px 12px rgba(59,130,246,0.2)'
+            }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
+              حسناً
             </button>
           </div>
         </div>
