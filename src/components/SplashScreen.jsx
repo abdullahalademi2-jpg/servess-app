@@ -33,7 +33,21 @@ export default function SplashScreen({ onFinish }) {
           </svg>
         </div>
         <h1 className="splash-title">خدمة مكتب</h1>
-        <p className="splash-subtitle">نجهز لك تجربة مميزة...</p>
+        
+        <div className="splash-services">
+          <span style={{animationDelay: '1.2s'}}>عمرة</span>
+          <span className="dot" style={{animationDelay: '1.3s'}}>•</span>
+          <span style={{animationDelay: '1.4s'}}>تأشيرات</span>
+          <span className="dot" style={{animationDelay: '1.5s'}}>•</span>
+          <span style={{animationDelay: '1.6s'}}>زيارات عائلية</span>
+          <span className="dot" style={{animationDelay: '1.7s'}}>•</span>
+          <span style={{animationDelay: '1.8s'}}>تذاكر طيران</span>
+          <span className="dot" style={{animationDelay: '1.9s'}}>•</span>
+          <span style={{animationDelay: '2.0s'}}>رحلات سفر</span>
+          <span className="dot" style={{animationDelay: '2.1s'}}>•</span>
+          <span style={{animationDelay: '2.2s'}}>شحن</span>
+        </div>
+
         <div className="splash-loader"></div>
       </div>
     </div>
